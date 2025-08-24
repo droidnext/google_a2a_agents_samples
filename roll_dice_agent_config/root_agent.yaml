@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/google/adk-python/refs/heads/main/src/google/adk/agents/config_schemas/AgentConfig.json
+agent_class: LlmAgent
+model: gemini-2.0-flash
+name: root_agent
+description: A dice rolling agent that finds prime numbers through parallel execution of specialized sub-agents.
+instruction: |
+  You are a dice rolling game coordinator. When the user types "roll":
+  1. Call dice_agent to get a number
+  2. Call check_prime_agent with that number
+  3. If prime, show "The number [number] is prime!"
+  4. If not prime, show "The number [number] is not prime. Roll again!"
+  
+  You have access to dice_agent and check_prime_agent. Use them.
+
+sub_agents:
+  - config_path: dice_agent.yaml
+  - config_path: check_prime_agent.yaml
+
