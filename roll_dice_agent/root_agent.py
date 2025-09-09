@@ -20,20 +20,26 @@ from google.genai import types
 
 
 # --- Roll Die Sub-Agent ---
-def roll_die(sides: int) -> int:
+def roll_dice() -> int:
   """Roll a die and return the rolled result."""
-  return random.randint(1, sides)
+  return random.randint(1, 6)
 
 
 roll_agent = LlmAgent(
     name="roll_agent",
-    description="Handles rolling dice of different sizes.",
+    description="A dice rolling agent that finds prime numbers through parallel execution of specialized sub-agents.",
     model="gemini-2.0-flash",
     instruction="""
-      You are responsible for rolling dice based on the user's request.
-      When asked to roll a die, you must call the roll_die tool with the number of sides as an integer.
+  You are a dice rolling game coordinator. When the user types "roll":
+  1. Call dice_agent to get a number
+  2. Call check_prime_agent with that number
+  3. If prime, show "The number [number] is prime!"
+  4. If not prime, show "The number [number] is not prime. Roll again!"
+  
+  You have access to dice_agent and check_prime_agent. Use them.
+
     """,
-    tools=[roll_die],
+    tools=[roll_dice],
     generate_content_config=types.GenerateContentConfig(
         safety_settings=[
             types.SafetySetting(  # avoid false alarm about rolling dice.
@@ -45,36 +51,30 @@ roll_agent = LlmAgent(
 )
 
 
-def check_prime(nums: list[int]) -> str:
-  """Check if a given list of numbers are prime."""
-  primes = set()
-  for number in nums:
-    number = int(number)
-    if number <= 1:
-      continue
-    is_prime = True
-    for i in range(2, int(number**0.5) + 1):
-      if number % i == 0:
-        is_prime = False
-        break
-    if is_prime:
-      primes.add(number)
-  return (
-      "No prime numbers found."
-      if not primes
-      else f"{', '.join(str(num) for num in primes)} are prime numbers."
-  )
+def check_prime(num: int) -> str:
+  """Check if a given number is prime."""
+  number = int(num)
+  if number <= 1:
+    return f"The number {number} is not prime."
+  
+  is_prime = True
+  for i in range(2, int(number**0.5) + 1):
+    if number % i == 0:
+      is_prime = False
+      break
+  
+  if is_prime:
+    return f"The number {number} is prime!"
+  else:
+    return f"The number {number} is not prime. Roll again!"
 
 
 prime_agent = LlmAgent(
     name="prime_agent",
-    description="Handles checking if numbers are prime.",
+    description="A specialized agent that determines whether a given number is prime.",
     model="gemini-2.0-flash",
     instruction="""
-      You are responsible for checking whether numbers are prime.
-      When asked to check primes, you must call the check_prime tool with a list of integers.
-      Never attempt to determine prime numbers manually.
-      Return the prime number results to the root agent.
+You are a prime number checking agent that determines if a given number is prime.
     """,
     tools=[check_prime],
     generate_content_config=types.GenerateContentConfig(

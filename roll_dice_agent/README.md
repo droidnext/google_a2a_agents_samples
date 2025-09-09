@@ -7,9 +7,9 @@ This folder contains a Python implementation of the dice rolling game using the 
 The system consists of three main components:
 
 ### 1. **roll_agent** (LlmAgent with Tools)
-- **Purpose**: Handles rolling dice of different sizes using the `roll_die` tool
+- **Purpose**: Handles rolling dice of different sizes using the `roll_dice` tool
 - **Class**: `LlmAgent` with tools
-- **Tool**: `roll_die(sides: int)` - Returns random number from 1 to sides
+- **Tool**: `roll_dice(sides: int)` - Returns random number from 1 to sides
 - **Model**: gemini-2.0-flash
 
 ### 2. **prime_agent** (LlmAgent with Tools)

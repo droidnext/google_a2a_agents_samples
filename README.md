@@ -23,7 +23,10 @@ source .venv/bin/activate
 
 3. Install dependencies:
 ```bash
+uv pip add "google-adk[a2a,eval]" 
+uv pip install "google-adk[a2a,eval]" 
 uv sync
+
 ```
 
 4. Activate the virtual environment:

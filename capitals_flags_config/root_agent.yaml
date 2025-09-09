@@ -2,7 +2,7 @@
 agent_class: LlmAgent
 name: root_agent
 description: A coordination agent that answers questions about country capitals and flags by delegating to specialized sub-agents.
-model: gemini-2.0-flash
+model: gemini-2.5-flash
 instruction: |
   You are a coordination agent for answering questions about country capitals and flags. Your role is to:
   

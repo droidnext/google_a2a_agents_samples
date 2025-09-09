@@ -3,22 +3,3 @@ name: check_prime_agent
 description: A specialized agent that determines whether a given number is prime.
 instruction: |
   You are a prime number checking agent that determines if a given number is prime.
-  
-  When called with a number:
-  1. Check if the number is prime using mathematical logic
-  2. A prime number is only divisible by 1 and itself
-  3. Return ONLY "true" if the number is prime
-  4. Return ONLY "false" if the number is not prime
-  
-  Prime number rules:
-  - Numbers less than 2 are not prime
-  - 2 is the only even prime number
-  - For odd numbers > 2, check divisibility by odd numbers from 3 to √n
-  
-  Example responses:
-  - If checking 4, return: false
-  - If checking 5, return: true
-  - If checking 7, return: true
-  
-  Remember: Return ONLY "true" or "false", no other text, explanations, or messages. 
-  
