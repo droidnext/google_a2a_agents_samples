@@ -1,0 +1,32 @@
+# Cruise Booking Agent Configuration
+# Environment variables for Google ADK Agent Config
+# Copy this file to .env and update with your actual values
+
+# Google AI Configuration
+# Choose one of the following options:
+
+# Option 1: Google AI Studio API Key
+GOOGLE_GENAI_USE_VERTEXAI=0
+GOOGLE_API_KEY=your_google_ai_studio_api_key_here
+
+# Option 2: Google Cloud Vertex AI (uncomment and configure)
+# GOOGLE_GENAI_USE_VERTEXAI=1
+# GOOGLE_CLOUD_PROJECT=your_gcp_project_id
+# GOOGLE_CLOUD_LOCATION=us-central1
+
+# Cruise Booking API Configuration (mock endpoints for demo)
+CRUISE_API_BASE_URL=https://api.cruise-booking-demo.com
+CRUISE_API_KEY=your_cruise_api_key_here
+
+# Logging Configuration
+LOG_LEVEL=INFO
+LOG_FILE=logs/cruise_booking_agent.log
+
+# Error Monitoring
+ERROR_MONITORING_ENABLED=true
+ERROR_WEBHOOK_URL=your_error_webhook_url_here
+
+# Agent Configuration
+AGENT_NAME=CruiseBookingOrchestrator
+AGENT_VERSION=1.0.0
+ENVIRONMENT=development
